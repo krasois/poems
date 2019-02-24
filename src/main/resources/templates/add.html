@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add new Poem</title>
+</head>
+<body>
+    <form action="/add" method="post">
+        <div>
+            <label for="title">Title</label>
+            <input id="title" name="title" type="text" placeholder="Poem's title"/>
+        </div>
+
+        <div>
+            <label for="author">Author</label>
+            <input id="author" name="author" type="text" placeholder="Author's name"/>
+        </div>
+
+        <div>
+            <label for="publishYear">Year released</label>
+            <input id="publishYear" name="publishYear" type="number" step="1" value="1900"/>
+        </div>
+
+        <div>
+            <label for="poemContent">Poem</label>
+            <input id="poemContent" name="poemContent" type="text" placeholder="Poem's content"/>
+        </div>
+
+        <input type="submit" value="Add"/>
+    </form>
+</body>
+</html>
