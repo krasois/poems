@@ -1,32 +1,69 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Add new Poem</title>
-</head>
-<body>
-    <form action="/add" method="post">
-        <div>
+<h1 class="content-title-xl">Add new poem</h1>
+
+<form action="/poem/add" method="post" th:object="${poem}">
+    <div class="row">
+        <div class="col-15">
             <label for="title">Title</label>
-            <input id="title" name="title" type="text" placeholder="Poem's title"/>
         </div>
+        <div class="col-85">
+            <input th:classappend="${#fields.hasErrors('title')} ? 'field-error'" th:value="*{title}"
+                   class="form-field" id="title" name="title" type="text" placeholder="Poem's title"/>
 
-        <div>
+            <th:block th:if="${#fields.hasErrors()}" th:each="error : ${#fields.errors('title')}">
+                <div>
+                    <small class="text-error" th:text="${error}"></small>
+                </div>
+            </th:block>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-15">
             <label for="author">Author</label>
-            <input id="author" name="author" type="text" placeholder="Author's name"/>
         </div>
+        <div class="col-85">
+            <input th:classappend="${#fields.hasErrors('author')} ? 'field-error'" th:value="*{author}"
+                    class="form-field" id="author" name="author" type="text" placeholder="Author's name"/>
 
-        <div>
+            <th:block th:if="${#fields.hasErrors()}" th:each="error : ${#fields.errors('author')}">
+                <div>
+                    <small class="text-error" th:text="${error}"></small>
+                </div>
+            </th:block>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-15">
             <label for="publishYear">Year released</label>
-            <input id="publishYear" name="publishYear" type="number" step="1" value="1900"/>
         </div>
+        <div class="col-85">
+            <input th:classappend="${#fields.hasErrors('publishYear')} ? 'field-error'" th:value="*{publishYear}"
+                    class="form-field" id="publishYear" name="publishYear" type="number" step="1"/>
 
-        <div>
+            <th:block th:if="${#fields.hasErrors()}" th:each="error : ${#fields.errors('publishYear')}">
+                <div>
+                    <small class="text-error" th:text="${error}"></small>
+                </div>
+            </th:block>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-15">
             <label for="poemContent">Poem</label>
-            <input id="poemContent" name="poemContent" type="text" placeholder="Poem's content"/>
         </div>
+        <div class="col-85">
+            <textarea th:classappend="${#fields.hasErrors('poemContent')} ? 'field-error'" th:text="*{poemContent}"
+                    class="form-field" id="poemContent" name="poemContent" placeholder="Poem's content"></textarea>
 
-        <input type="submit" value="Add"/>
-    </form>
-</body>
-</html>
+            <th:block th:if="${#fields.hasErrors()}" th:each="error : ${#fields.errors('poemContent')}">
+                <div>
+                    <small class="text-error" th:text="${error}"></small>
+                </div>
+            </th:block>
+        </div>
+    </div>
+
+    <input class="float-right submit" type="submit" value="Add"/>
+</form>

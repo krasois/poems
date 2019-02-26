@@ -1,0 +1,35 @@
+<div th:object="${poems}">
+    <ul class="navigation">
+        <!--Previous-->
+        <li class="navigation-item" th:if="*{hasPrevious()}"><a class="page-link"
+                                                                th:href="@{${rout}(page=*{previousPageable().getPageNumber()})}">&laquo;</a>
+        </li>
+
+        <!--Previous Dots-->
+        <li class="navigation-item"><a class="page-link" th:if="*{getPageable().getPageNumber() + 1 > 5}"
+                                       th:href="@{${rout}(page=*{((getPageable().getPageNumber()/ 5) * 5) - 1})}">...</a>
+        </li>
+
+        <!--Pagination Navigation-->
+        <th:block th:each="number : *{#numbers.sequence(
+                    ((getPageable().getPageNumber() / 5) * 5) + 1,
+                    ((getPageable().getPageNumber() / 5) * 5) + 5)}">
+            <li class="navigation-item"
+                th:classappend="${number == poems.getPageable().getPageNumber() + 1} ? 'active'"
+                th:if="${number <= poems.getTotalPages()}">
+                <a class="page-link" th:text="${number}" th:href="@{${rout}(page=${number - 1})}"></a>
+            </li>
+        </th:block>
+
+        <!--Next Dots-->
+        <li class="navigation-item"><a class="page-link"
+                                       th:if="*{((getPageable().getPageNumber()/ 5) * 5) + 5 < getTotalPages()}"
+                                       th:href="@{${rout}(page=*{((getPageable().getPageNumber()/ 5) * 5) + 5})}">...</a>
+        </li>
+
+        <!--Next-->
+        <li class="navigation-item" th:if="*{hasNext()}"><a class="page-link"
+                                                            th:href="@{${rout}(page=*{nextPageable().getPageNumber()})}">&raquo;</a>
+        </li>
+    </ul>
+</div>

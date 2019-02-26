@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Poems</title>
+    <link rel="stylesheet" type="text/css" href="/styles/style.css">
+    <script src="/scripts/jquery-3.3.1.min.js"></script>
+    <script src="/scripts/year-loader.js"></script>
+</head>
+<body>
+
+<ul class="navbar">
+    <li class="navbar"><a class="navbar" href="/">Home</a></li>
+    <li class="navbar"><a class="navbar" href="/poem/add">Add</a></li>
+    <li class="navbar float-right">
+        <form action="/poem/search" method="get">
+            <input type="text" name="query" placeholder="Search..."/>
+            <select id="years" name="year">
+                <option value="0">After year</option>
+            </select>
+            <input type="submit" value="Search"/>
+        </form>
+    </li>
+</ul>
+
+<div class="container-center">
+    <th:block th:replace="${view}"></th:block>
+</div>
+
+<script>
+    $(function () {
+        loadYears();
+    });
+</script>
+
+</body>
+</html>

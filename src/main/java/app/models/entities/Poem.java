@@ -27,7 +27,7 @@ public class Poem {
     @Column(name = "publish_year", nullable = false)
     private int publishYear;
 
-    @Column(name = "poem_content", nullable = false)
+    @Column(name = "poem_content", nullable = false, length = 65534)
     private String poemContent;
 
     @Column(name = "date_added", nullable = false)

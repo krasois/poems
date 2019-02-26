@@ -1,25 +1,22 @@
-<!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Poems</title>
-</head>
-<body>
-<table>
+<h1 class="content-title-xl">All poems registered</h1>
+
+<table class="alternating">
     <thead>
     <tr>
-        <td>Title</td>
-        <td>Author</td>
-        <td>Release Year</td>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Year published</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="poem : ${poems}">
-        <td th:text="${poem.title}"></td>
+        <td><a th:href="@{/poem/details/} + ${poem.getId()}" th:text="${poem.title}"></a></td>
         <td th:text="${poem.author}"></td>
         <td th:text="${poem.publishYear}"></td>
     </tr>
     </tbody>
 </table>
-</body>
-</html>
+
+<div th:with="rout=@{/?}">
+    <th:block th:replace="poems-table-pagination"></th:block>
+</div>
