@@ -5,7 +5,7 @@
     <tr>
         <th>Title</th>
         <th>Author</th>
-        <th>Release Year</th>
+        <th>Year Published</th>
     </tr>
     </thead>
     <tbody>
@@ -14,9 +14,13 @@
         <td th:text="${poem.author}"></td>
         <td th:text="${poem.publishYear}"></td>
     </tr>
+
+    <tr th:if="${poems.isEmpty()}">
+        <td colspan="3" style="text-align: center; font-style: italic">No poems found</td>
+    </tr>
     </tbody>
 </table>
 
-<div th:with="rout=@{/poem/search?(query=${query}, year=${year})}">
+<div th:if="${!poems.isEmpty()}" th:with="rout=@{/poem/search?(query=${query}, year=${year})}">
     <th:block th:replace="poems-table-pagination"></th:block>
 </div>
