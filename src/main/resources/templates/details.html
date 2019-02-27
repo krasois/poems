@@ -1,4 +1,4 @@
 <h1 class="content-title-xl" th:text="${poem.getTitle()}"></h1>
-<h4 class="content-title-xs" th:text="${poem.getDateAdded()}"></h4>
+<h4 class="content-title-xs" th:text="${'Added ' + #dates.format(poem.getDateAdded(), 'dd MMM yy HH:mm:ss')}"></h4>
 <p class="content-title-m" th:text="${poem.getPoemContent()}"></p>
 <h3 class="content-title-s" th:text="${'-' + poem.getAuthor() + ', ' + poem.getPublishYear()}"></h3>

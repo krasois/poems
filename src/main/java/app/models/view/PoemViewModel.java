@@ -1,5 +1,7 @@
 package app.models.view;
 
+import java.util.Date;
+
 public class PoemViewModel {
 
     private String title;
@@ -10,7 +12,7 @@ public class PoemViewModel {
 
     private String poemContent;
 
-    private String dateAdded;
+    private Date dateAdded;
 
     public PoemViewModel() {
     }
@@ -47,11 +49,11 @@ public class PoemViewModel {
         this.poemContent = poemContent;
     }
 
-    public String getDateAdded() {
+    public Date getDateAdded() {
         return dateAdded;
     }
 
-    public void setDateAdded(String dateAdded) {
+    public void setDateAdded(Date dateAdded) {
         this.dateAdded = dateAdded;
     }
 }

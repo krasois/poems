@@ -18,8 +18,8 @@ public class PoemBindingModel {
     private static final int MAX_AUTHOR_NAME_LENGTH = 200;
 
     private static final String EMPTY_POEM_CONTENT_MESSAGE = "Poem text cannot be empty.";
-    private static final int MAX_CONTENT_LENGTH = 65534;
-    private static final String CONTENT_LENGTH_ERROR_MESSAGE = "Content must be between 1 and 65534 characters long.";
+    private static final int MAX_CONTENT_LENGTH = 20000;
+    private static final String CONTENT_LENGTH_ERROR_MESSAGE = "Content must be between 1 and 20000 characters long.";
 
     private static final String NEGATIVE_YEAR_MESSAGE = "Publish year cannot be negative.";
     private static final int MIN_YEAR = 0;

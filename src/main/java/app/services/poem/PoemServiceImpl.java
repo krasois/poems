@@ -11,13 +11,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Service
 public class PoemServiceImpl implements PoemService {
-
-    private static final String DATE_TO_STRING_FORMAT = "dd-MM-yyyy HH:mm:ss";
 
     private final PoemRepository poemRepository;
 
@@ -38,8 +35,7 @@ public class PoemServiceImpl implements PoemService {
     private PoemViewModel makeModel(Poem poem) {
         PoemViewModel model = new PoemViewModel();
         model.setAuthor(poem.getAuthor());
-        String formattedDate = "Added " + new SimpleDateFormat(DATE_TO_STRING_FORMAT).format(poem.getDateAdded());
-        model.setDateAdded(formattedDate);
+        model.setDateAdded(poem.getDateAdded());
         model.setPoemContent(poem.getPoemContent());
         model.setTitle(poem.getTitle());
         model.setPublishYear(poem.getPublishYear());
