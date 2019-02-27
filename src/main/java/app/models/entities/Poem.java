@@ -1,11 +1,13 @@
 package app.models.entities;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.search.annotations.*;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Indexed
 @Table(name = "poems")
 public class Poem {
 
@@ -19,9 +21,11 @@ public class Poem {
     private String id;
 
     @Column(name = "title", nullable = false)
+    @Field(analyze =  Analyze.YES)
     private String title;
 
     @Column(name = "author", nullable = false)
+    @Field(analyze = Analyze.YES)
     private String author;
 
     @Column(name = "publish_year", nullable = false)
