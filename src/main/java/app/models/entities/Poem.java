@@ -29,6 +29,7 @@ public class Poem {
     private String author;
 
     @Column(name = "publish_year", nullable = false)
+    @Field(analyze = Analyze.YES)
     private int publishYear;
 
     @Column(name = "poem_content", nullable = false, length = 20000)

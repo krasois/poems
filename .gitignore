@@ -1,5 +1,6 @@
 target/
 !.mvn/wrapper/maven-wrapper.jar
+app.models.entities.Poem/
 
 ### STS ###
 .apt_generated

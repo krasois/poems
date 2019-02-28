@@ -54,8 +54,11 @@ public class HibernateSearchServiceImpl implements HibernateSearchService {
     public Page<PoemTableRowViewModel> fuzzySearch(String query, Integer year, Pageable pageable) {
         FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(entityManager);
         QueryBuilder qb = fullTextEntityManager.getSearchFactory().buildQueryBuilder().forEntity(Poem.class).get();
-        Query luceneQuery = qb.keyword().fuzzy().withEditDistanceUpTo(1).withPrefixLength(1).onFields("title", "author")
-                .matching(query).createQuery();
+        Query luceneQuery = qb
+                .bool()
+                .must(qb.keyword().fuzzy().onFields("title", "author").matching(query).createQuery())
+                .must(qb.range().onField("publishYear").above(year).createQuery())
+                .createQuery();
 
         javax.persistence.Query jpaQuery = fullTextEntityManager.createFullTextQuery(luceneQuery, Poem.class);
 
@@ -66,13 +69,11 @@ public class HibernateSearchServiceImpl implements HibernateSearchService {
             ;
         }
 
-        if (poemsList == null) return new PageImpl<>(new ArrayList<>());
-
-        List<Poem> filtered = poemsList.stream().filter(p -> p.getPublishYear() > year).collect(Collectors.toList());
+        if (poemsList == null || poemsList.isEmpty()) return new PageImpl<>(new ArrayList<>());
 
         int start = (int) pageable.getOffset();
-        int end = (start + pageable.getPageSize()) > filtered.size() ? filtered.size() : (start + pageable.getPageSize());
-        Page<Poem> pages = new PageImpl<>(filtered.subList(start, end), pageable, filtered.size());
+        int end = (start + pageable.getPageSize()) > poemsList.size() ? poemsList.size() : (start + pageable.getPageSize());
+        Page<Poem> pages = new PageImpl<>(poemsList.subList(start, end), pageable, poemsList.size());
 
         return pages.map(this::makeTableRowModel);
     }
